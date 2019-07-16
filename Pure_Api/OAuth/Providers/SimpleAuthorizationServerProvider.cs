@@ -1,10 +1,14 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Pure_Api.Models;
+
 namespace Pure_Api.OAuth.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
+
+        //private TestEntities db = new TestEntities();
         // OAuthAuthorizationServerProvider sınıfının client erişimine izin verebilmek için ilgili ValidateClientAuthentication metotunu override ediyoruz.
         public override async System.Threading.Tasks.Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
@@ -15,6 +19,7 @@ namespace Pure_Api.OAuth.Providers
         {
             // CORS ayarlarını set ediyoruz.
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
             // Kullanıcının access_token alabilmesi için gerekli validation işlemlerini yapıyoruz.
             if (context.UserName == "Mete" && context.Password == "123456")
             {
